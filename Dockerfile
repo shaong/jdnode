@@ -1,15 +1,15 @@
-FROM alpine:3.1
+FROM node:boron
 
-# Update
-RUN apk add --update nodejs
+#Create app directory
+WORKDIR /usr/src/app
 
 # Install app dependencies
-COPY package.json /src/package.json
-RUN cd /src; npm Install
+COPY package.json .
+RUN cd /src; npm install
 
 # Bundle app source
 
-COPY . /src
+COPY . .
 
 EXPOSE 8080
-CMD ["node", "/src/index.js"]
+CMD ["npm", "start"]
